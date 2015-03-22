@@ -46,7 +46,7 @@ int elmTrain( double *X, int dims, int nsmp,
 	bias = MatrixXd::Random( nhn, 1 );
 
 	// compute the pre-H matrix
-	MatrixXd preH = inW * mX;
+	MatrixXd preH = inW * mX + bias.replicate( 1, nsmp );
 
 	// compute hidden neuron output
 	MatrixXd H = (1 + (-preH.array()).exp()).cwiseInverse();
