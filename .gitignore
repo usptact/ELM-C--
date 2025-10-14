@@ -1,0 +1,132 @@
+# Build directories
+build/
+bin/
+lib/
+Build/
+out/
+
+# CMake
+CMakeCache.txt
+CMakeFiles/
+CMakeScripts/
+cmake_install.cmake
+install_manifest.txt
+compile_commands.json
+CTestTestfile.cmake
+_deps/
+
+# Compiled Object files
+*.slo
+*.lo
+*.o
+*.obj
+
+# Precompiled Headers
+*.gch
+*.pch
+
+# Compiled Dynamic libraries
+*.so
+*.dylib
+*.dll
+
+# Fortran module files
+*.mod
+*.smod
+
+# Compiled Static libraries
+*.lai
+*.la
+*.a
+*.lib
+
+# Executables
+*.exe
+*.out
+*.app
+elm_train
+elm_predict
+
+# MATLAB MEX
+*.mexa64
+*.mexw64
+*.mexw32
+*.mexmaci64
+*.mex
+
+# Generated model files (optional - comment out if you want to track models)
+*.elm
+model.elm
+predictions.csv
+
+# IDE specific files
+# Visual Studio
+.vs/
+*.vcxproj
+*.vcxproj.filters
+*.vcxproj.user
+*.sln
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+*.VC.db
+*.VC.opendb
+
+# Visual Studio Code
+.vscode/
+*.code-workspace
+
+# CLion / JetBrains IDEs
+.idea/
+cmake-build-*/
+
+# Eclipse
+.cproject
+.project
+.settings/
+
+# Xcode
+*.xcodeproj
+*.xcworkspace
+
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Linux
+*~
+
+# Windows
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+
+# Temporary files
+*.swp
+*.swo
+*.tmp
+*.temp
+*.log
+*.bak
+*.backup
+
+# Python (for any potential scripts)
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+venv/
+env/
+
+# Data files (optional - comment out if you want to track data)
+# *.csv
+# *.mat
+
+# Documentation build
+doc/html/
+doc/latex/
+

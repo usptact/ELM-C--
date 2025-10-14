@@ -1,3 +1,17 @@
+// Copyright 2025 ELM-C++ Contributors
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//     http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+
 // Trains an ELM model on the provided dataset.
 //
 //	[inW bias outW] = mexElmTrain( X, Y [, nhn, C ] );
@@ -60,14 +74,6 @@ void mexFunction( int nlhs, mxArray *plhs[], int nrhs, const mxArray *prhs[] ) {
 	// get pointer to labels
 	double *Y_ptr = (double *) mxGetPr( prhs[YDATA] );
 
-	// get pointer to number of hidden neurons
-	if ( nrhs > 2 )
-		int *nhn_ptr = (int *) mxGetData( prhs[NHIDD] );
-
-	// get pointer to regularization parameter
-	if ( nrhs > 3 )
-		double *C_ptr = (double *) mxGetPr( prhs[CPARA] );
-
 	//
 	// GET INFO ABOUT INPUT DATA
 	//
@@ -88,11 +94,27 @@ void mexFunction( int nlhs, mxArray *plhs[], int nrhs, const mxArray *prhs[] ) {
 	if ( nsmpX != ndimsY )
 		mexErrMsgTxt( "Data matrix column and labels vector length mismatch." );
 
-	// read parameter values
-	double *tmp = mxGetPr( prhs[CPARA] );
-	const double C = static_cast<double>( *tmp );	
-	tmp = mxGetPr( prhs[NHIDD] );
-	const int nhn = static_cast<int>( *tmp );
+	// read parameter values with defaults
+	int nhn = ndimsX / 2;  // default: half of input dimensions
+	double C = 1.0;        // default: no regularization
+	
+	if ( nrhs > 2 ) {
+		double *tmp = mxGetPr( prhs[NHIDD] );
+		nhn = static_cast<int>( *tmp );
+	}
+	
+	if ( nrhs > 3 ) {
+		double *tmp = mxGetPr( prhs[CPARA] );
+		C = static_cast<double>( *tmp );
+	}
+	
+	// Validate parameters
+	if ( nhn <= 0 ) {
+		mexErrMsgTxt( "Number of hidden neurons must be positive." );
+	}
+	if ( C <= 0 ) {
+		mexErrMsgTxt( "Regularization parameter C must be positive." );
+	}
 
 	//
 	// MODEL TRAINING
